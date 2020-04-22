@@ -1,2 +1,6 @@
 # systolic_pq
-A SystemVerilog implementation of Lieserson's Systolic Priority Queue
+systolic_pq is a  SystemVerilog implementation of Lieserson's Systolic Priority
+Queue described in the CMU Computer Science Department Tech Report "Systolic
+Priority Queues (Report Number CMU-CS-79-115, April 1979)".  Currently this
+implements the "Simple Systolic Priority Queue" describeed in Section 3 of
+the report.
