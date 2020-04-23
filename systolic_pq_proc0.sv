@@ -1,5 +1,10 @@
 //
 //  Processing node 0 for Lieserson's Systolic Priority Queue
+// This node interfaces with the outside world and passes
+// information to the actual processing nodes P1-PN.
+// Data is inserted and removed from the PQ using valid-ready interface/
+// This module also generates timing signals for odd/even nodes and
+// keeps track of the number of items currently in the PQ.
 //
 
 module #(parameter kW=8, VW=4) systolic_pq_proc0 (
@@ -18,6 +23,7 @@ module #(parameter kW=8, VW=4) systolic_pq_proc0 (
     // may want to move these to the main module?
     parameter logic [KW-1:0] PQINF = '1;
     parameter logic [KW-1:0] PQNEGINF = '0;
+    localparam PQ_CAPACITY = 4;
 
     //--------------------------------------------------
     // Generate odd, even enables
