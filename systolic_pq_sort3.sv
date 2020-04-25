@@ -3,11 +3,12 @@
 // TODO: add key/value and sort by key only
 //
 
-module #(parameter KW=8, VW=4) systolic_pq_sort3 (
+module systolic_pq_sort3 #(parameter KW=8, VW=4)  (
     input logic [KW+VW-1:0] a, b, c,
     output logic [KW+VW-1:0] minv, medv, maxv);
 
-  logic [KW-1:0] ka, ab, kc;
+  logic [KW-1:0] ka, kb, kc;
+  logic a_gt_b, a_gt_c, b_gt_c;
 
   // extract the keys
   assign ka = a[KW+VW-1:VW];
@@ -53,4 +54,4 @@ module #(parameter KW=8, VW=4) systolic_pq_sort3 (
       // remaining cases 3'b010, 3'b101 cannot occur!
     endcase
   end
-endmodule : sort3
+endmodule : systolic_pq_sort3

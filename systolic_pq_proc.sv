@@ -2,31 +2,26 @@
 //  Processing node for Lieserson's Systolic Priority Queue
 //
 
-module #(parameter kW=8, VW=4) systolic_pq_proc (
+module systolic_pq_proc #(parameter KW=8, VW=4)  (
     input logic clk, rst, enb,
     input logic [KW+VW-1:0] bi, ai, axi,
-    output logic [WW+VW-1:0] bp, bp, axo);
+    output logic [KW+VW-1:0] bo, ao, axo);
 
   parameter logic [KW+VW-1:0] PQINF = '1;
   parameter logic [KW+VW-1:0] PQNEGINF = '0;
-
-  logic aiu_gt_biu, aiu_gt_bod, biu_gt_bod;
+  
   logic [KW+VW-1:0] minv, medv, maxv;
 
-  assign aiu_gt_biu = aiu > biu;
-  assign aiu_bg_bod = aiu > bod;
-  assign biu_gt_bod = biu > bod;
-
-  sort3 U_SORT3 (.a(ao), .b(bi), .c(axi), .minv, .medv, .maxv);
-
+  systolic_pq_sort3 U_SORT3 (.a(ai), .b(ao), .c(bi), .minv, .medv, .maxv);
+  
   assign axo = minv;
 
   always_ff @(posedge clk)
     begin
       if (rst)
         begin
-          bo <= INF;
-          ao <= INF;
+          bo <= PQINF;
+          ao <= PQINF;
         end
       else if (enb)
         begin
@@ -36,8 +31,6 @@ module #(parameter kW=8, VW=4) systolic_pq_proc (
       else
        begin  // not enabled - exchange a
          ao <= axi;
-    end
-
-
-//    arrange the elements in a[i], a[i-1] and b[i] so that
-//       a[i-1] <= a[i] <= b[i]
+       end
+     end
+endmodule: systolic_pq_proc
