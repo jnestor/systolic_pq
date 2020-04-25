@@ -57,3 +57,14 @@ Extract operations have a latency of three clock cycles - they are initiated
 on an even cycle by inserting an "Inifinite" value into the pipeline which
 will appear on the output during the next even clock cycle.  The correct value
 is available on the next even clock cycle.
+
+## Stuff to Do:
+
+1. Replace the individual instantiations of processors with a generate
+that allows the length to be prioritized.
+2. Clean up parameterize and pass them from the top-level module into
+submodules as needed.
+3. Synthesize and implement on an FPGA to get resource usage and performance
+information.
+4. Look at implementing the tree-based priority queue described in the
+tech report.
